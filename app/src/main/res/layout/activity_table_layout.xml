@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:stretchColumns="1"
+    tools:context=".TableLayoutActivity">
+
+    <TableRow>
+        <TextView
+            android:text="    Open..."
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:gravity="right"
+            android:text="Ctrl+O"
+            android:textColor="@color/white" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="    Save..."
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:gravity="right"
+            android:text="Ctrl+S"
+            android:textColor="@color/white" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="    Save As..."
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:gravity="right"
+            android:text="Ctrl+Shift+S"
+            android:textColor="@color/white" />
+    </TableRow>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"/>
+    <TableRow>
+        <TextView
+            android:text="X  Import..."
+            android:textColor="@color/white"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="X  Export..."
+            android:textColor="@color/white"/>
+        <TextView
+            android:text="Ctrl+E"
+            android:textColor="@color/white"
+            android:gravity="right"/>
+    </TableRow>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"/>
+    <TableRow>
+        <TextView
+            android:text="    Quit"
+            android:textColor="@color/white"/>
+    </TableRow>
+</TableLayout>
