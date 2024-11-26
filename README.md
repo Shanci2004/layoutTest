@@ -52,7 +52,7 @@
             android:gravity="center"/>
 ```
 ### 结果
-![image](images\1.png)
+![image](images/1.png)
 
 ## 二 表格布局
 表格布局是按照表格来进行布局，通过TableRow来放入不同行、列，通过stretchColumns等参数，进行布局。
@@ -81,7 +81,7 @@
 ```
 ### 4、TableRow设计
 在TableRow中有2个TextView，其中第二个TextView由于前面设置的StretchColumns会进行拉伸，效果如图。并且设置了`android:gravity="right"`使得文本靠右
-![image](images\2.png)
+![image](images/2.png)
 ```
     <TableRow>
         <TextView
@@ -104,7 +104,7 @@
 ```
 
 ### 结果
-![image](images\3.png)
+![image](images/3.png)
 
 ## 三 约束布局1——计算器
 约束布局，通过对每个部件设计约束，"layout_constraint..."如"app:layout_constraintEnd_toEndOf"、"app:layout_constraintStart_toStartOf"等，进行布局。
@@ -268,7 +268,7 @@ private void clear(){
 ```
 
 ### 结果
-![image](images\4.png)
+![image](images/4.png)
 
 ## 四 约束布局2——规定布局界面
 ### 1、创建一个ConstraintLayoutActivity，同时创建一个布局activity_constraint_layout.xml
@@ -280,3 +280,124 @@ private void clear(){
         setContentView(R.layout.activity_constraint_layout);
     }
 ```
+### 3、编写activity_constraint_layout.xml
+对于上方3个图片及文字，采用ImageView和TextView来实现。其中，TextView与ImageView必定有一个顶对底的约束，剩余的便是与父布局的左右侧以及顶部的约束，以及各图片和文字之间的约束。然后再设置margin的距离即可。
+![image](images/5.png)
+```
+    <ImageView
+        android:id="@+id/station"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/space_station_icon"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/station_t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Space Stations"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintTop_toBottomOf="@id/station"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+```
+对于中上方的三个图片，左右两幅图采用TextView实现，各自设置顶部以及左侧的约束，第一幅左侧对父布局左侧，第二幅左侧对第一幅左侧。中间的图，顶部底部的约束对于第一幅图的顶部和底部，就可以实现处于垂直正中央，然后左侧对第一幅图左侧约束，右侧对第二幅图右侧约束，就可以实现位于两幅图的水平正中央。
+要注意的是，编写代码时ImageView要在两个TextView后定义，否则无法处于两幅图的上层。
+![image](images/6.png)
+```
+    <TextView
+        android:id="@+id/DCA"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:background="#006400"
+        android:text="DCA"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="60dp"
+        app:layout_constraintTop_toBottomOf="@id/station_t"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+    <TextView
+        android:id="@+id/MARS"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:background="#006400"
+        android:text="MARS"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="50dp"
+        app:layout_constraintTop_toBottomOf="@id/rocket_t"
+        app:layout_constraintLeft_toRightOf="@id/DCA"/>
+    <ImageView
+        android:id="@+id/double_arrow"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/double_arrows"
+        app:layout_constraintLeft_toLeftOf="@id/DCA"
+        app:layout_constraintRight_toRightOf="@id/MARS"
+        app:layout_constraintTop_toTopOf="@id/DCA"
+        app:layout_constraintBottom_toBottomOf="@id/DCA"/>
+```
+中下部，第一个采用switch实现，第二个采用TextView实现，分别定义左侧和顶部的约束
+![image](images/7.png)
+```
+    <Switch
+        android:id="@+id/switch_oneway"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="  One Way"
+        android:textColor="@color/white"
+        android:background="#8B4500"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/DCA"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+    <TextView
+        android:id="@+id/tv_1traveller"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
+        android:text="1 Traveller"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="#8B4500"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        app:layout_constraintTop_toBottomOf="@id/switch_oneway"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+```
+底部，上方2个图片用ImageView实现，rocket定义顶部的约束以及marginTop，然后定义右侧与galaxy左侧的约束。galaxy定义顶部的约束以及marginTop，然后定义左右侧与父布局的约束，以实现水平中央。底下的DEPART采用TextView，定义底部与父布局底部的约束，实现位于最底部。
+![image](images/8.png)
+```
+    <ImageView
+        android:id="@+id/galaxy"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/galaxy"
+        android:layout_marginTop="350dp"
+        app:layout_constraintTop_toBottomOf="@id/double_arrow"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/rocket_icon"
+        android:layout_marginTop="370dp"
+        android:layout_marginRight="24dp"
+        app:layout_constraintRight_toLeftOf="@id/galaxy"
+        app:layout_constraintTop_toBottomOf="@id/DCA"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="DEPART"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="#006400"
+        android:layout_marginTop="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+```
+### 结果
+![image](images/9.png)
